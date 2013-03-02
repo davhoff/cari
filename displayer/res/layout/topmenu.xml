@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <View android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+    
+    <ImageButton
+        android:background="?android:selectableItemBackground"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="backButton"
+	    android:src="@drawable/menu_button"
+	    android:contentDescription="@string/description_backButton" />
+
+    <View android:layout_weight="2"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+        
+    <ImageButton
+        android:background="?android:selectableItemBackground"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="refreshButton"
+	    android:src="@drawable/reload_button"
+	    android:contentDescription="@string/description_refreshButton" />
+    
+    <View android:layout_weight="2"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+    	
+    <ImageButton
+        android:background="?android:selectableItemBackground"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="bigPicButton"
+	    android:src="@drawable/big_pic_button"
+	    android:contentDescription="@string/description_bigPicButton" />
+    
+    <View android:layout_weight="2"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+        
+    <ImageButton
+        android:background="?android:selectableItemBackground"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="smallPicButton"
+	    android:src="@drawable/small_pic_button"
+	    android:contentDescription="@string/description_smallPicButton" />
+    
+    <View android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+        
+</LinearLayout>

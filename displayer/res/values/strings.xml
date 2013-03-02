@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Caric\'Actus</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_big_pic">BigPicActivity</string>
+    <string name="menuButton_allImages">CARICATURES</string>
+    <string name="menuButton_tags">THEMES</string>
+    <string name="menuButton_authors">DESSINATEURS</string>
+    <string name="menuButton_bestImage">EPINE DE LA SEMAINE</string>
+    <string name="title_activity_small_pic">SmallPicActivity</string>
+    
+    <string name="description_backButton">Menu Button</string>
+    <string name="description_refreshButton">Refresh Button</string>
+    <string name="description_bigPicButton">BicPic Button</string>
+    <string name="description_smallPicButton">SmallPic Button</string>
+    
+    <string name="description_barbel">Barbelés</string>
+    <string name="description_cactusTop">Cactus Top</string>
+    <string name="description_cactusMiddle">Cactus Middle</string>
+    <string name="description_cactusBottom">Cactus Bottom</string>
+    
+
+</resources>

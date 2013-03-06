@@ -3,6 +3,7 @@ package com.caricactus.displayer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,16 +11,25 @@ import android.widget.RelativeLayout;
 
 public class BigPicActivity extends Activity
 {
+	String _selectionType;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_big_pic);
-		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
 		
+		// Display proper title and barbel
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
-		barbel.setImageResource(R.drawable.all_title_barbel);
-		
+		_selectionType = getIntent().getStringExtra("SELECTION_TYPE");
+		if(_selectionType.equals("TAG"))
+			barbel.setImageResource(R.drawable.tag_title_barbel);
+		else if(_selectionType.equals("AUTHOR"))
+			barbel.setImageResource(R.drawable.author_title_barbel);
+		else
+			barbel.setImageResource(R.drawable.all_title_barbel);
+		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
+
 		ImageView image = new ImageView(this);
 		image.setImageResource(R.drawable.placeholder);
 		image.setId(400);
@@ -63,6 +73,8 @@ public class BigPicActivity extends Activity
 	public void smallPicButton(View view)
 	{
 		Intent intent = new Intent(this, SmallPicActivity.class);
+		Log.v("msg", _selectionType);
+		intent.putExtra("SELECTION_TYPE", _selectionType);
 		startActivity(intent);
 	}
 }

@@ -30,6 +30,10 @@
             android:name="com.caricactus.displayer.SmallPicActivity"
             android:label="@string/title_activity_small_pic" >
         </activity>
+        <activity
+            android:name="com.caricactus.displayer.TagActivity"
+            android:label="@string/title_activity_tag" >
+        </activity>
     </application>
 
 </manifest>

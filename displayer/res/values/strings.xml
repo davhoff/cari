@@ -10,16 +10,15 @@
     <string name="menuButton_authors">DESSINATEURS</string>
     <string name="menuButton_bestImage">EPINE DE LA SEMAINE</string>
     <string name="title_activity_small_pic">SmallPicActivity</string>
-    
     <string name="description_backButton">Menu Button</string>
     <string name="description_refreshButton">Refresh Button</string>
     <string name="description_bigPicButton">BicPic Button</string>
     <string name="description_smallPicButton">SmallPic Button</string>
-    
     <string name="description_barbel">Barbelés</string>
     <string name="description_cactusTop">Cactus Top</string>
     <string name="description_cactusMiddle">Cactus Middle</string>
     <string name="description_cactusBottom">Cactus Bottom</string>
-    
+    <string name="title_activity_tag">TagActivity</string>
+	<string name="description_tag">Tag Tile</string>
 
 </resources>

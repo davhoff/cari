@@ -1,6 +1,7 @@
 package com.caricactus.displayer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -49,7 +50,8 @@ public class SmallPicActivity extends Activity
 	
 	public void refreshButton(View view)
 	{
-		
+		Intent intent = new Intent(this, ReloadActivity.class);
+		startActivity(intent);
 	}
 	
 	public void bigPicButton(View view)

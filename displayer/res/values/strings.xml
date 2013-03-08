@@ -19,6 +19,7 @@
     <string name="description_cactusMiddle">Cactus Middle</string>
     <string name="description_cactusBottom">Cactus Bottom</string>
     <string name="title_activity_tag">TagActivity</string>
-	<string name="description_tag">Tag Tile</string>
+    <string name="description_tag">Tag Tile</string>
+    <string name="title_activity_reload">ReloadActivity</string>
 
 </resources>

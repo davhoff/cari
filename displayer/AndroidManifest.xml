@@ -34,6 +34,10 @@
             android:name="com.caricactus.displayer.TagActivity"
             android:label="@string/title_activity_tag" >
         </activity>
+        <activity
+            android:name="com.caricactus.displayer.ReloadActivity"
+            android:label="@string/title_activity_reload" >
+        </activity>
     </application>
 
 </manifest>

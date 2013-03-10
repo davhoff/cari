@@ -3,7 +3,6 @@ package com.caricactus.displayer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -37,9 +36,6 @@ public class MenuActivity extends Activity
 			Intent intent = new Intent(this, ReloadActivity.class);
 			startActivity(intent);
 		}
-		
-		//ImageDbHelper dbHelper = new ImageDbHelper(this);
-		//dbHelper.addImageList("20,20_79058678o,jpg,Bar,SOCIETE-ECONOMIE,2012-09-15 15:09:17,Encore du tabac;");
 	}
 	
 	// User taps on a button
@@ -49,6 +45,7 @@ public class MenuActivity extends Activity
 		{
 			Intent intent = new Intent(this, BigPicActivity.class);
 			intent.putExtra("SELECTION_TYPE", "ALL");
+			intent.putExtra("SELECTION_ARG", "");
 			startActivity(intent);
 		}
 		

@@ -1,65 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BigPic"
-    android:background="@drawable/paper_background" >
+    android:background="@drawable/paper_background"
+    android:orientation="vertical" >
 
-	<include layout="@layout/topmenu" android:id="@+id/included"/>
+	<include layout="@layout/topmenu" />
 	
-	<ScrollView android:id="@+id/bigPicScroller"
-	    android:layout_below="@id/included"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
-		
-	    <RelativeLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" >
-	        
-		    <RelativeLayout android:id="@+id/topCactus"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content" >
-			    
-			    <ImageView android:id="@+id/cactusTop"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:src="@drawable/cactus_haut"
-				    android:scaleType="center"
-				    android:contentDescription="@string/description_cactusTop" />
-			    
-		    </RelativeLayout>
-		    
-		    
-    	    <RelativeLayout android:id="@+id/scrollerBody"
-    	        android:layout_below="@id/topCactus"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:gravity="center_horizontal" >
-		    
-		    </RelativeLayout>
-		    
-    	    
-		   	<RelativeLayout android:id="@+id/bottomCactus"
-			    android:layout_below="@id/scrollerBody"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content" >
-			    
-			    <ImageView 
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content"
-				    android:src="@drawable/cactus_bas"
-				    android:contentDescription="@string/description_cactusBottom" />
-			    
-		    </RelativeLayout>
-	        
-	    </RelativeLayout>
-	    
-	</ScrollView>
+	<include layout="@layout/scroller" />
 	
-	<ImageView android:id="@+id/barbel"
-	    android:layout_below="@id/included"
-	    android:layout_width="match_parent"
-	    android:layout_height="150dp"
-		android:contentDescription="@string/description_barbel" />
-	
-</RelativeLayout>
+</LinearLayout>

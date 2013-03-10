@@ -42,25 +42,34 @@ public class TagActivity extends Activity
 		}
 		else
 		{
+			String tag = "REPLACE BY TAG NAME";
 			switch(view.getId())
 			{
 				case R.id.tagTile11:
+					tag = "INTERNATIONAL";
 					break;
 				case R.id.tagTile12:
+					tag = "SOCIETE";
 					break;
 				case R.id.tagTile13:
+					tag = "ECONOMIE";
 					break;
 				case R.id.tagTile21:
+					tag = "SCIENCES";
 					break;
 				case R.id.tagTile23:
+					tag = "CULTURE";
 					break;
 				case R.id.tagTile31:
+					tag = "POLITIQUE";
 					break;
 				case R.id.tagTile32:
+					tag = "SPORT";
 					break;
 			}
 			Intent intent = new Intent(this, BigPicActivity.class);
 			intent.putExtra("SELECTION_TYPE", "TAG");
+			intent.putExtra("SELECTION_ARG", tag);
 			startActivity(intent);
 		}
 	}

@@ -2,17 +2,17 @@ package com.caricactus.displayer;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 public class Gallery
@@ -46,6 +46,23 @@ public class Gallery
 	private boolean[] _isSelected;
 	
 	private ArrayList<Author> _authorList;
+	
+	/**
+	 * Gets a specific Caricature in the list
+	 * @param id ID of the Caricature to retrieve
+	 * @return The Caricature (null if not found)
+	 */
+	public Caricature getCaricature(int id)
+	{
+		for(Caricature c : _imageList)
+		{
+			if(c._id == id)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
 	
 	public void updateImageList()
 	{
@@ -151,11 +168,28 @@ public class Gallery
 		LayoutInflater inflater = LayoutInflater.from(context);
 		LinearLayout bigPic = (LinearLayout) inflater.inflate(R.layout.bigpic, null, false);
 		bigPic.setLayoutParams(layout);
-		bigPic.setId(previousId+1);
+		bigPic.setId(previousId+10);
 		
-		ImageView image = (ImageView)bigPic.findViewById(R.id.newImage);
+		// Image
+		ImageButton image = (ImageButton)bigPic.findViewById(R.id.newImage);
+		image.setId(previousId+1);
 		image.setImageResource(R.drawable.reload_button);
-		image.setId(image.getId()+1);
+		image.setTag(c._id);
+		
+		// Author
+		TextView author = (TextView)bigPic.findViewById(R.id.newAuthor);
+		author.setId(previousId+2);
+		author.setText(c._author);
+		
+		// Spike button
+		ImageButton spikeButton = (ImageButton)bigPic.findViewById(R.id.newSpikeButton);
+		spikeButton.setId(previousId+3);
+		spikeButton.setTag(c._id);
+		
+		// Spike count
+		TextView spikeCount = (TextView)bigPic.findViewById(R.id.newSpikeCount);
+		spikeCount.setId(previousId+4);
+		spikeCount.setText(String.valueOf(c._spikes));
 		
 		return bigPic;
 	}

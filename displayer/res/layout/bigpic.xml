@@ -8,28 +8,79 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="2" />
+        android:layout_weight="52" />
     
-    <ImageView android:id="@+id/newImage"
+    <ImageButton android:id="@+id/newImage"
+        android:background="?android:selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:scaleType="fitCenter" />
+        android:layout_weight="249"
+        android:scaleType="fitCenter"
+        android:onClick="imageButton" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="33" />
     
     <LinearLayout 
 		android:layout_width="match_parent"
         android:layout_height="0dp"
 		android:orientation="horizontal"
-        android:layout_weight="2" >
+        android:layout_weight="66" >
         
+        <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="6" />
         
+        <ImageButton android:id="@+id/newSpikeButton"
+            android:background="?android:selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:src="@drawable/spike_big_pic"
+            android:scaleType="fitXY"
+            android:onClick="spikeButton" />
+        
+        <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="1" />
+        
+        <TextView android:id="@+id/newSpikeCount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:textColor="#000000"
+            android:textAlignment="textEnd"
+            android:gravity="center_vertical"
+            android:textSize="24sp" />
+        
+        <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="3" />
+        
+        <TextView android:id="@+id/newAuthor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="22"
+            android:textColor="#000000"
+            android:gravity="right|center_vertical"
+            android:textSize="24sp" />
+        
+        <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="7" />
         
     </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="8" />
     
     
 </LinearLayout>

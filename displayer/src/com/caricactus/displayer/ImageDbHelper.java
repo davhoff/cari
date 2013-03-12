@@ -178,8 +178,8 @@ public class ImageDbHelper extends SQLiteOpenHelper
 			COLUMN_NAME_DIDSPIKE
 		};
 		
-		// TODO: order by date
-		Cursor c = getDb().query(IMAGE_TABLE_NAME, projection, null, null, null, null, null);
+		// Get the result ordered by date
+		Cursor c = getDb().query(IMAGE_TABLE_NAME, projection, null, null, null, null, "date("+COLUMN_NAME_DATE+") DESC");
 		
 		c.moveToFirst();
 		int count = 0;

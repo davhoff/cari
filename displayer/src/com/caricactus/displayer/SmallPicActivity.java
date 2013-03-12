@@ -73,9 +73,13 @@ public class SmallPicActivity extends Activity
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		Log.v("adjust","BP1");
 		
 		findViewById(R.id.topCactus).getLayoutParams().height = size.x * 10 / 19;
 		findViewById(R.id.bottomCactus).getLayoutParams().height = size.x * 10 / 28;
+	}
+	
+	public void imageButton(View view)
+	{
+		
 	}
 }

@@ -21,6 +21,7 @@ public class BigPicActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_big_pic);
 		
+		//*/ TODO: place this in a task!
 		// Display proper title and barbel, and select the right images in the Gallery
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
 		_selectionType = getIntent().getStringExtra("SELECTION_TYPE");
@@ -47,8 +48,9 @@ public class BigPicActivity extends Activity
 		// Build the Scroller
 		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
 		Gallery.Singleton().buildScroller(scrollerBody, this, "BIG");
+		//*/
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -76,7 +78,6 @@ public class BigPicActivity extends Activity
 	public void smallPicButton(View view)
 	{
 		Intent intent = new Intent(this, SmallPicActivity.class);
-		Log.v("msg", _selectionType);
 		intent.putExtra("SELECTION_TYPE", _selectionType);
 		startActivity(intent);
 	}
@@ -86,9 +87,19 @@ public class BigPicActivity extends Activity
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		Log.v("adjust","BP1");
 		
 		findViewById(R.id.topCactus).getLayoutParams().height = size.x * 10 / 19;
 		findViewById(R.id.bottomCactus).getLayoutParams().height = size.x * 10 / 28;
+	}
+	
+	public void spikeButton(View view)
+	{
+		Caricature c = Gallery.Singleton().getCaricature(Integer.valueOf(view.getTag().toString()));
+		c.spike();
+	}
+	
+	public void imageButton(View view)
+	{
+		
 	}
 }

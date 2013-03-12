@@ -1,5 +1,7 @@
 package com.caricactus.displayer;
 
+import android.util.Log;
+
 
 public class Caricature
 {
@@ -28,4 +30,9 @@ public class Caricature
 	
 	// TODO: getBigPic
 	// getSmallPic
+	
+	public void spike()
+	{
+		Log.v("spike","id: "+_id);
+	}
 }

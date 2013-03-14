@@ -7,9 +7,9 @@
     <uses-sdk
         android:minSdkVersion="13"
         android:targetSdkVersion="13" />
-	
+
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -39,6 +39,10 @@
         <activity
             android:name="com.caricactus.displayer.ReloadActivity"
             android:label="@string/title_activity_reload" >
+        </activity>
+        <activity
+            android:name="com.caricactus.displayer.FullscreenActivity"
+            android:label="@string/title_activity_fullscreen" >
         </activity>
     </application>
 

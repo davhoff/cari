@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,12 +18,17 @@ public class BigPicActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_big_pic);
+	}
+
+	public void onStart()
+	{
+		super.onStart();
 		
-		//*/ TODO: place this in a task!
 		// Display proper title and barbel, and select the right images in the Gallery
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
 		_selectionType = getIntent().getStringExtra("SELECTION_TYPE");
 		String selectionArg = getIntent().getStringExtra("SELECTION_ARG");
+
 		if(_selectionType.equals("TAG"))
 		{
 			barbel.setImageResource(R.drawable.tag_title_barbel);
@@ -48,15 +51,15 @@ public class BigPicActivity extends Activity
 		// Build the Scroller
 		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
 		Gallery.Singleton().buildScroller(scrollerBody, this, "BIG");
-		//*/
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
+	public void onStop()
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_big_pic, menu);
-		return true;
+		super.onStop();
+		// Release the Scroller
+		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
+		scrollerBody.removeAllViews();
 	}
 	
 	public void backButton(View view)
@@ -100,6 +103,8 @@ public class BigPicActivity extends Activity
 	
 	public void imageButton(View view)
 	{
-		
+		Intent intent = new Intent(this, FullscreenActivity.class);
+		intent.putExtra("IMAGE_ID", (Integer)view.getTag());
+		startActivity(intent);
 	}
 }

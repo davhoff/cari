@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/small_pic" >
+    
+	
+    <LinearLayout 
+        android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="16"
+		android:orientation="vertical">
+        
+        <View
+		    android:layout_width="0dp"
+		    android:layout_height="0dp"
+		    android:layout_weight="10" />
+		
+        <TextView android:id="@+id/newSpikeCount"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="8"
+            android:gravity="top|right"
+		    android:text="SPK"
+		    android:textColor="#000000"
+            android:textSize="18dp" />
+        
+    </LinearLayout>
+    
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="7" />
+    
+    <LinearLayout 
+        android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="30"
+		android:orientation="vertical">
+        
+        <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="2" />
+        
+        <ImageButton android:id="@+id/newImage"
+            android:background="?android:selectableItemBackground"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="28"
+	        android:scaleType="fitCenter"
+	        android:onClick="imageButton" />
+        
+	    <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="7" />
+        
+    </LinearLayout>
+    
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="11" />
+    
+    <LinearLayout 
+        android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="40"
+		android:orientation="vertical">
+
+        <TextView android:id="@+id/newTitle"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="20"
+        	android:gravity="bottom|center_horizontal"
+		    android:text="TITLE"
+		    android:textColor="#000000"
+            android:textSize="24dp" />
+        
+        <TextView android:id="@+id/newAuthor"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="12"
+		    android:gravity="right|center_vertical"
+		    android:text="AUTHOR"
+		    android:textColor="#000000"
+            android:textSize="24dp" />   
+        
+    </LinearLayout>
+    
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="24" />
+        
+</LinearLayout>

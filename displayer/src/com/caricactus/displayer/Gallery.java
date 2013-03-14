@@ -1,6 +1,8 @@
 package com.caricactus.displayer;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -128,8 +130,8 @@ public class Gallery
 		display.getSize(size);
 		_screenWidth = size.x;
 		
+		Stack<Caricature> remainingList = new Stack<Caricature>();
 		View pic = null;
-		View cactus = null;
 		boolean isFirst = true;
 		for(int i=0; i<_imageList.length; i++)
 		{
@@ -146,25 +148,60 @@ public class Gallery
 				}
 				else
 				{
-					cactus = createMiddleCactus(context, pic.getId());
-					scrollerBody.addView(cactus);
-					
-					if(type.equals("BIG"))
-						pic = createBigPic(_imageList[i], context, cactus.getId());
-					else
-						pic = createSmallPic(_imageList[i], context, pic.getId());
-					scrollerBody.addView(pic);
+					remainingList.push(_imageList[i]);
 				}
 			}
 		}
+		if(!remainingList.empty())
+		{
+			ItemDisplayer r = new ItemDisplayer(scrollerBody, context, type, pic.getId(), remainingList);
+			scrollerBody.postDelayed(r, 50);
+		}
 	}
-
+	
+	
+	class ItemDisplayer implements Runnable
+	{
+		WeakReference<RelativeLayout> _scrollerBody;
+		WeakReference<Context> _context;
+		String _type;
+		int _previousId;
+		Stack<Caricature> _remainingList;
+		
+		ItemDisplayer(RelativeLayout scrollerBody, Context context, String type, int previousId, Stack<Caricature> remainingList)
+		{
+			_scrollerBody = new WeakReference<RelativeLayout>(scrollerBody);
+			_context = new WeakReference<Context>(context);
+			_type = type;
+			_previousId = previousId;
+			_remainingList = remainingList;
+		}
+		
+		public void run()
+		{
+			View cactus = createMiddleCactus(_context.get(), _previousId);
+			_scrollerBody.get().addView(cactus);
+			
+			View pic;
+			if(_type.equals("BIG"))
+				pic = createBigPic(_remainingList.pop(), _context.get(), cactus.getId());
+			else
+				pic = createSmallPic(_remainingList.pop(), _context.get(), _previousId);
+			_scrollerBody.get().addView(pic);
+			
+			if(!_remainingList.empty())
+			{
+				ItemDisplayer r = new ItemDisplayer(_scrollerBody.get(), _context.get(), _type, pic.getId(), _remainingList);
+				_scrollerBody.get().postDelayed(r, 200);
+			}
+		}
+	}
+	
 	private View createBigPic(Caricature c, Context context, int previousId)
 	{
 		// Layout for the new cactus piece
 		RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, _screenWidth * 10 / 16);
 		layout.addRule(RelativeLayout.BELOW, previousId);
-		
 		LayoutInflater inflater = LayoutInflater.from(context);
 		LinearLayout bigPic = (LinearLayout) inflater.inflate(R.layout.bigpic, null, false);
 		bigPic.setLayoutParams(layout);
@@ -173,7 +210,7 @@ public class Gallery
 		// Image
 		ImageButton image = (ImageButton)bigPic.findViewById(R.id.newImage);
 		image.setId(previousId+1);
-		image.setImageResource(R.drawable.reload_button);
+		c.setImage(image);
 		image.setTag(c._id);
 		
 		// Author
@@ -199,14 +236,33 @@ public class Gallery
 		// Layout for the new cactus piece
 		RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, _screenWidth * 10 / 35);
 		layout.addRule(RelativeLayout.BELOW, previousId);
+		LayoutInflater inflater = LayoutInflater.from(context);
+		LinearLayout smallPic = (LinearLayout) inflater.inflate(R.layout.smallpic, null, false);
+		smallPic.setLayoutParams(layout);
+		smallPic.setId(previousId+10);
 		
-		// Build the container
-		ImageView bigPic = new ImageView(context);
-		bigPic.setImageResource(R.drawable.small_pic);
-		bigPic.setLayoutParams(layout);
-		bigPic.setId(previousId+1);
+		// Image
+		ImageButton image = (ImageButton)smallPic.findViewById(R.id.newImage);
+		image.setId(previousId+1);
+		c.setImage(image);
+		image.setTag(c._id);
+		
+		// Author
+		TextView author = (TextView)smallPic.findViewById(R.id.newAuthor);
+		author.setId(previousId+2);
+		author.setText(c._author);
 
-		return bigPic;
+		// Title
+		TextView title = (TextView)smallPic.findViewById(R.id.newTitle);
+		title.setId(previousId+2);
+		title.setText(c._title);
+		
+		// Spike count
+		TextView spikeCount = (TextView)smallPic.findViewById(R.id.newSpikeCount);
+		spikeCount.setId(previousId+4);
+		spikeCount.setText(String.valueOf(c._spikes));
+		
+		return smallPic;
 	}
 	
 	private View createMiddleCactus(Context context, int previousId)

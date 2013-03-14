@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,6 +18,14 @@ public class SmallPicActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_big_pic);
+		
+
+	}
+	
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		
 		// Display proper title and barbel
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
@@ -38,13 +44,15 @@ public class SmallPicActivity extends Activity
 		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
 		Gallery.Singleton().buildScroller(scrollerBody, this, "SMALL");
 	}
-
+	
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
+	public void onStop()
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_big_pic, menu);
-		return true;
+		super.onStop();
+		// Release the Scroller
+		RelativeLayout scrollerBody = (RelativeLayout)findViewById(R.id.scrollerBody);
+		scrollerBody.removeAllViews();
 	}
 	
 	public void backButton(View view)
@@ -80,6 +88,8 @@ public class SmallPicActivity extends Activity
 	
 	public void imageButton(View view)
 	{
-		
+		Intent intent = new Intent(this, FullscreenActivity.class);
+		intent.putExtra("IMAGE_ID", (Integer)view.getTag());
+		startActivity(intent);
 	}
 }

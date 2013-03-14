@@ -134,6 +134,8 @@ public class ImageDbHelper extends SQLiteOpenHelper
 		getDb().insert(IMAGE_TABLE_NAME, null, values);
 	}
 	
+
+	
 	public long getLastId()
 	{
 		String[] projection = { COLUMN_NAME_ID };
@@ -202,7 +204,7 @@ public class ImageDbHelper extends SQLiteOpenHelper
 			String title = c.getString(c.getColumnIndexOrThrow(COLUMN_NAME_TITLE));
 			int spikes = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_SPIKES));
 			int didSpike = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_DIDSPIKE));
-			imageList[i] = new Caricature(id, file+"."+filetype, tags, author, title, date, spikes, didSpike);
+			imageList[i] = new Caricature(id, file, filetype, tags, author, title, date, spikes, didSpike);
 			c.moveToNext();
 		}
 		

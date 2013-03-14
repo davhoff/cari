@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 
 public class ReloadActivity extends Activity
 {
+	static String STORAGE_DIR;
+	
 	long _waitingTime = 2000;
 	long _initialTime = System.currentTimeMillis();
 	long _refreshTime = 50;
@@ -30,6 +32,8 @@ public class ReloadActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reload);
+		
+		STORAGE_DIR = getFilesDir().getAbsolutePath();
 		
 		// Organize the update of the progress bar
 		ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);

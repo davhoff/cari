@@ -1,49 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.caricactus.displayer"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="13"
         android:targetSdkVersion="13" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.NoActionBar" >
+        android:theme="@android:style/Theme.Holo.NoActionBar">
         <activity
             android:name="com.caricactus.displayer.MenuActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+        	android:screenOrientation="portrait"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.caricactus.displayer.BigPicActivity"
-            android:label="@string/title_activity_big_pic" >
+            android:name="com.caricactus.displayer.ViewerActivity"
+            android:label="@string/title_activity_big_pic"
+        	android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.caricactus.displayer.SmallPicActivity"
-            android:label="@string/title_activity_small_pic" >
+            android:label="@string/title_activity_small_pic"
+        	android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.caricactus.displayer.TagActivity"
-            android:label="@string/title_activity_tag" >
+            android:label="@string/title_activity_tag"
+        	android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.caricactus.displayer.ReloadActivity"
-            android:label="@string/title_activity_reload" >
+            android:label="@string/title_activity_reload"
+        	android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.caricactus.displayer.FullscreenActivity"
-            android:label="@string/title_activity_fullscreen" >
+            android:label="@string/title_activity_fullscreen"
+        	android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.caricactus.displayer.BestPicActivity"
+            android:label="@string/title_activity_best_pic"
+        	android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.caricactus.displayer.AuthorActivity"
+            android:label="@string/title_activity_author"
+        	android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" >
+        </activity>
+        
     </application>
 
 </manifest>

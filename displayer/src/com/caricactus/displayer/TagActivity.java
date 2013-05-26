@@ -2,10 +2,14 @@ package com.caricactus.displayer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 public class TagActivity extends Activity
 {
@@ -16,8 +20,25 @@ public class TagActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag);
 		
+		// Screen width
+		Point size = new Point();
+		getWindowManager().getDefaultDisplay().getSize(size);
+		int screenWidth = size.x;
+		
+		// Barbel layout
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
 		barbel.setImageResource(R.drawable.tag_title_barbel);
+		LayoutParams barbelLayout = new LayoutParams(screenWidth, screenWidth / 5);
+		barbelLayout.addRule(RelativeLayout.BELOW, R.id.included);
+		barbel.setLayoutParams(barbelLayout);
+		
+		// Tile canevas layout
+		LinearLayout canevas = (LinearLayout)findViewById(R.id.tile_canevas);
+		int margin = 50;
+		LinearLayout.LayoutParams canevasLayout = new LinearLayout.LayoutParams(screenWidth-2*margin, screenWidth-2*margin);
+		canevasLayout.setMargins(margin, margin, margin, margin);
+		canevas.setLayoutParams(canevasLayout);
+		canevas.requestLayout();
 	}
 
 	@Override
@@ -39,6 +60,9 @@ public class TagActivity extends Activity
 		if(view.getId() == R.id.tagTile33)
 		{
 			// Choose a random pic and go fullscreen
+			Intent intent = new Intent(this, FullscreenActivity.class);
+			intent.putExtra("IMAGE_ID", Gallery.Singleton().getRandomId());
+			startActivity(intent);
 		}
 		else
 		{
@@ -67,7 +91,7 @@ public class TagActivity extends Activity
 					tag = "SPORT";
 					break;
 			}
-			Intent intent = new Intent(this, BigPicActivity.class);
+			Intent intent = new Intent(this, ViewerActivity.class);
 			intent.putExtra("SELECTION_TYPE", "TAG");
 			intent.putExtra("SELECTION_ARG", tag);
 			startActivity(intent);

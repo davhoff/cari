@@ -3,7 +3,6 @@ package com.caricactus.displayer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 public class MenuActivity extends Activity
@@ -18,18 +17,11 @@ public class MenuActivity extends Activity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_menu, menu);
-		return true;
-	}
-
-	@Override
 	public void onResume()
 	{
 		super.onResume();
 		
+		// Only put a Reload screen on the first onResume.
 		if(isFirstDisplay)
 		{
 			isFirstDisplay = false;
@@ -43,7 +35,7 @@ public class MenuActivity extends Activity
 	{
 		if (view.getId() == R.id.allImagesButton)
 		{
-			Intent intent = new Intent(this, BigPicActivity.class);
+			Intent intent = new Intent(this, ViewerActivity.class);
 			intent.putExtra("SELECTION_TYPE", "ALL");
 			intent.putExtra("SELECTION_ARG", "");
 			startActivity(intent);
@@ -52,6 +44,18 @@ public class MenuActivity extends Activity
 		if (view.getId() == R.id.tagsButton)
 		{
 			Intent intent = new Intent(this, TagActivity.class);
+			startActivity(intent);
+		}
+		
+		if(view.getId() == R.id.authorsButton)
+		{
+			Intent intent = new Intent(this, AuthorActivity.class);
+			startActivity(intent);
+		}
+		
+		if(view.getId() == R.id.bestImageButton)
+		{
+			Intent intent = new Intent(this, BestPicActivity.class);
 			startActivity(intent);
 		}
 	}

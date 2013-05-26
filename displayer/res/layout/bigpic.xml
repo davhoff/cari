@@ -39,7 +39,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:src="@drawable/spike_big_pic"
             android:scaleType="fitXY"
             android:onClick="spikeButton" />
         
@@ -54,7 +53,7 @@
             android:layout_weight="10"
             android:textColor="#000000"
             android:gravity="center_vertical"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
         
         <View
 	        android:layout_width="0dp"
@@ -67,7 +66,7 @@
             android:layout_weight="22"
             android:textColor="#000000"
             android:gravity="right|center_vertical"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
         
         <View
 	        android:layout_width="0dp"

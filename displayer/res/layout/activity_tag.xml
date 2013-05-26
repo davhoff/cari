@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TagActivity"
-    android:background="@drawable/paper_background" >
+    android:background="@drawable/paper_background">
 	
 	<include layout="@layout/topmenu_short" android:id="@+id/included"/>
     
@@ -11,108 +10,148 @@
 	    android:layout_below="@id/included"
 	    android:layout_width="match_parent"
 	    android:layout_height="150dp"
+	    android:scaleType="fitXY"
 		android:contentDescription="@string/description_barbel" />
 	
 	<LinearLayout
 	    android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:orientation="vertical"
-    	android:gravity="center" >
-
-	    <View android:layout_weight="5"
-        	android:layout_height="0dp"
-        	android:layout_width="0dp" />
-	    
-		<LinearLayout
-		    android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:gravity="center" >
-	    	
-		    <ImageButton android:id="@+id/tagTile11"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique11"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageButton android:id="@+id/tagTile12"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique12"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageButton android:id="@+id/tagTile13"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique13"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    		    
-		</LinearLayout>
-
-		<LinearLayout
-		    android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:gravity="center" >
-	    	
-		    <ImageButton android:id="@+id/tagTile21"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique21"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageView android:id="@+id/tagTile22"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique22"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageButton android:id="@+id/tagTile23"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique23"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    		    
+	   	android:layout_height="match_parent"
+	   	android:layout_below="@id/barbel"
+    	android:orientation="vertical">
+		
+		<View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="1" />
+		
+		<LinearLayout android:id="@+id/tile_canevas"
+		    android:layout_width="match_parent"
+		   	android:layout_height="0dp"
+	    	android:orientation="vertical"
+	    	android:background="#000000"
+	    	android:padding="3dp"
+	    	android:layout_margin="50dp"
+	    	android:layout_alignParentBottom="true" >
+		    
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="0dp"
+		    	android:layout_weight="1">
+		    	
+			    <ImageButton android:id="@+id/tagTile11"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique11"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    <ImageButton android:id="@+id/tagTile12"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique12"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag"
+			        android:paddingLeft="3dp"
+			        android:paddingRight="3dp" />
+			    <ImageButton android:id="@+id/tagTile13"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique13"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    		    
+			</LinearLayout>
+	
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="0dp"
+		    	android:layout_weight="1"
+		    	android:paddingTop="3dp"
+		    	android:paddingBottom="3dp" >
+		    	
+			    <ImageButton android:id="@+id/tagTile21"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique21"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    <ImageView android:id="@+id/tagTile22"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique22"
+			    	android:scaleType="fitXY"
+			        android:contentDescription="@string/description_tag"
+			        android:paddingLeft="3dp"
+			        android:paddingRight="3dp" />
+			    <ImageButton android:id="@+id/tagTile23"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique23"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    		    
+			</LinearLayout>
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="0dp"
+		    	android:layout_weight="1">
+		    	
+			    <ImageButton android:id="@+id/tagTile31"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique31"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    <ImageButton android:id="@+id/tagTile32"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique32"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag"
+			        android:paddingLeft="3dp"
+			        android:paddingRight="3dp" />
+			    <ImageButton android:id="@+id/tagTile33"
+	                android:background="?android:selectableItemBackground"
+				    android:layout_width="0dp"
+			    	android:layout_height="match_parent"
+			    	android:layout_weight="1"
+			    	android:src="@drawable/mosaique33"
+			    	android:scaleType="fitXY"
+			    	android:onClick="tagClick"
+			        android:contentDescription="@string/description_tag" />
+			    		    
+			</LinearLayout>
+				    		    	    
 		</LinearLayout>
 		
-		<LinearLayout
-		    android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:gravity="center" >
-	    	
-		    <ImageButton android:id="@+id/tagTile31"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique31"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageButton android:id="@+id/tagTile32"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique32"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    <ImageButton android:id="@+id/tagTile33"
-                android:background="?android:selectableItemBackground"
-			    android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:src="@drawable/mosaique33"
-		    	android:onClick="tagClick"
-		        android:contentDescription="@string/description_tag" />
-		    		    
-		</LinearLayout>
+		<View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="1" />
 		
-	    <View android:layout_weight="2"
-        	android:layout_height="0dp"
-        	android:layout_width="0dp" />
-			    		    	    
 	</LinearLayout>
 	
 </RelativeLayout>

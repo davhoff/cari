@@ -162,7 +162,44 @@ public class ImageDbHelper extends SQLiteOpenHelper
 		    args.put(COLUMN_NAME_SPIKES, Integer.parseInt(pair[1]));
 			getDb().update(IMAGE_TABLE_NAME, args, COLUMN_NAME_ID+"="+pair[0], null);  
 		}
+	}
+	
+	public int[][] getSpikes()
+	{
+		String[] projection =
+		{
+			COLUMN_NAME_ID,
+			COLUMN_NAME_SPIKES
+		};
 		
+		// Get the result ordered by date
+		Cursor c = getDb().query(IMAGE_TABLE_NAME, projection, null, null, null, null, null);
+		c.moveToFirst();
+		int count = 0;
+		while(!c.isAfterLast())
+		{
+			c.moveToNext();
+			count++;
+		}
+
+		c.moveToFirst();
+		
+		int[][] result = new int[count][2];
+		for(int i=0; i<count; i++)
+		{
+			result[i][0] = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_ID));
+			result[i][1] = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_SPIKES));
+			c.moveToNext();
+		}
+		
+		return result;
+	}
+	
+	public void spikeImage(int id)
+	{
+		ContentValues args = new ContentValues();
+	    args.put(COLUMN_NAME_DIDSPIKE, 1);
+		getDb().update(IMAGE_TABLE_NAME, args, COLUMN_NAME_ID+"="+id, null);
 	}
 	
 	public Caricature[] getImagesFromDb()
@@ -191,9 +228,10 @@ public class ImageDbHelper extends SQLiteOpenHelper
 			count++;
 		}
 
-		c.moveToFirst();
+		// Build Caricatures in reverse order to make sure we download the last pictures first
+		c.moveToLast();
 		Caricature[] imageList = new Caricature[count];
-		for(int i=0; i<count; i++)
+		for(int i=count-1; i>=0; i--)
 		{
 			int id = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_ID));
 			String file = c.getString(c.getColumnIndexOrThrow(COLUMN_NAME_FILE));
@@ -205,7 +243,7 @@ public class ImageDbHelper extends SQLiteOpenHelper
 			int spikes = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_SPIKES));
 			int didSpike = c.getInt(c.getColumnIndexOrThrow(COLUMN_NAME_DIDSPIKE));
 			imageList[i] = new Caricature(id, file, filetype, tags, author, title, date, spikes, didSpike);
-			c.moveToNext();
+			c.moveToPrevious();
 		}
 		
 		return imageList;

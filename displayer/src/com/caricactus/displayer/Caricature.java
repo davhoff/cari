@@ -1,5 +1,6 @@
 package com.caricactus.displayer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,8 +50,107 @@ public class Caricature
 		downloadMiniature();
 	}
 	
-	// TODO: getBigPic
-	// getSmallPic
+	public void spike(ImageButton source, ISpikeDisplayer viewer)
+	{
+		if(!_didSpike)
+		{
+			_didSpike = true;
+			// Update the spike button
+			source.setImageResource(R.drawable.spike_big_pic_disabled);
+			source.setEnabled(false);
+			
+			if(viewer != null)
+				new SpikeTask(viewer).execute();
+		}
+		else
+			Log.v("spike","You already spiked the id: "+_id);
+	}
+	
+	
+	class SpikeTask extends AsyncTask<Void, Void, Void>
+	{
+		private final WeakReference<ISpikeDisplayer> _viewerReference;
+		
+	    public SpikeTask(ISpikeDisplayer viewer)
+	    {
+	    	_viewerReference = new WeakReference<ISpikeDisplayer>(viewer);
+	    }
+
+	    @Override
+	    protected Void doInBackground(Void... params)
+	    {
+	    	try
+	    	{
+		    	// Notify the DB with the new spike
+	    		ImageDbHelper.getCurrent().spikeImage(_id);
+	    		
+	    		// Spike web request
+			    HttpClient client = AndroidHttpClient.newInstance("caricactus");
+	    		try
+				{
+				    String url = "http://caricactus.com/feeds/v1/appli/spike.php?id="+_id+"&device=android&version=v1";
+					client.execute(new HttpGet(url));
+				}
+			    catch(Exception e)
+			    {
+			    	Log.v("Caricature Ex", e.getMessage());
+			    }
+	    		
+	    		// Update all spikes in DB
+	    		try
+				{
+				    String url = "http://caricactus.com/feeds/v1/appli/getSpikeCount.php";
+					
+			        HttpResponse response = client.execute(new HttpGet(url));
+			        
+				    StatusLine statusLine = response.getStatusLine();
+				    if(statusLine.getStatusCode() == HttpStatus.SC_OK)
+				    {
+				        ByteArrayOutputStream output = new ByteArrayOutputStream();
+				        response.getEntity().writeTo(output);
+				        output.close();
+				        String responseString = output.toString();
+				        Log.v("Gallery", "Response: " + responseString);
+				        
+				        ImageDbHelper.getCurrent().updateSpikes(responseString);
+				    }
+				    else
+				    {
+				        //Closes the connection.
+				        response.getEntity().getContent().close();
+				        throw new IOException(statusLine.getReasonPhrase());
+				    }
+				}
+			    catch(Exception e)
+			    {
+			    	Log.v("Caricature Ex", e.getMessage());
+			    }
+		    	
+		    	// Update spikes in Gallery
+	    		Gallery.Singleton().updateSpikes();
+	    	}
+	    	catch(Exception ex)
+	    	{
+	    		
+	    	}
+	    	return null;
+	    }
+
+	    @Override
+	    protected void onPostExecute(Void d)
+	    {
+	    	// Trigger an update for all visible spikes
+	    	if (_viewerReference != null)
+	        {
+	            final ISpikeDisplayer viewer = _viewerReference.get();
+	            if (viewer != null)
+	            {            	
+	            	viewer.refreshSpikes();
+	            }
+	        }
+	    }
+	}
+	
 	
 	public void setImage(ImageButton view)
 	{
@@ -71,15 +171,14 @@ public class Caricature
 	    {
 	    	try
 	    	{
-		    	Log.v("LoadBitmap:", _file);
-		    	Bitmap bitmap = BitmapFactory.decodeFile(ReloadActivity.STORAGE_DIR + "/" + _file);
-		    	Log.v("!! Loaded !!", _file);
+	    		BitmapFactory.Options options = new BitmapFactory.Options();
+	    		options.inPurgeable = true;
+	    		options.inInputShareable = true;
+		    	Bitmap bitmap = BitmapFactory.decodeFile(ReloadActivity.STORAGE_DIR + "/" + _file, options);
 		    	return bitmap;
 	    	}
 	    	catch(Exception ex)
 	    	{
-	    		Log.v("LoadBitmap:", "ERROR with file: " + _file);
-	    		Log.v("LoadBitmap:", "msg:    " + _file);
 	    		return null;
 	    	}
 	    }
@@ -97,15 +196,9 @@ public class Caricature
 	        }
 	    }
 	}
-	
-	public void spike()
-	{
-		Log.v("spike","id: "+_id);
-	}
-	
+		
 	void downloadImage()
 	{
-		Log.v("downloadImage",ReloadActivity.STORAGE_DIR + "/" + _file);
 		File file = new File(ReloadActivity.STORAGE_DIR + "/" + _file);
 		if(!file.exists())
 		{
@@ -116,7 +209,6 @@ public class Caricature
 
 	void downloadMiniature()
 	{
-		Log.v("downloadImage",ReloadActivity.STORAGE_DIR + _miniatureFile);
 		File file = new File(ReloadActivity.STORAGE_DIR + _miniatureFile);
 		if(!file.exists())
 		{
@@ -155,7 +247,7 @@ public class Caricature
 			}
 		    catch(Exception e)
 		    {
-		    	Log.v("Gallery Ex", e.getMessage());
+		    	Log.v("Failed to download image: ", e.getMessage());
 		    }
 			
 			return null;

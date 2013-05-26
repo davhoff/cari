@@ -1,16 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ReloadActivity"
-    android:gravity="bottom" >
-
-    <ProgressBar android:id="@+id/progressBar"
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	style="@android:style/Widget.ProgressBar.Horizontal"
-    	android:layout_margin="70dp"
-    	android:progressDrawable="@drawable/progress_bar"
-        />
+   	android:layout_height="match_parent"
+   	android:background="@drawable/reload_background" >
+   	
+    <LinearLayout
+        android:layout_width="match_parent"
+	   	android:layout_height="match_parent"
+	   	android:orientation="vertical" >
+        
+	    <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="300" />
+	        
+	    <ProgressBar android:id="@+id/progressBar"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	style="@android:style/Widget.ProgressBar.Horizontal"
+	    	android:layout_marginRight="70dp"
+	    	android:layout_marginLeft="70dp"
+	    	android:progressDrawable="@drawable/progress_bar" />
+	
+	    <View
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_weight="670" />
+	    
+    </LinearLayout>
+	    	    
     
+    
+    <com.google.ads.AdView android:id="@+id/ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="a1514d9008bde1b"
+        ads:testDevices="86566B8D933C5A164940F844E58149B7"
+        ads:loadAdOnCreate="true" />
+
 </RelativeLayout>

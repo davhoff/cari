@@ -22,5 +22,7 @@
     <string name="description_tag">Tag Tile</string>
     <string name="title_activity_reload">ReloadActivity</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="title_activity_best_pic">BestPicActivity</string>
+    <string name="title_activity_author">AuthorActivity</string>
 
 </resources>

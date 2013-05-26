@@ -21,7 +21,7 @@ public class ReloadActivity extends Activity
 {
 	static String STORAGE_DIR;
 	
-	long _waitingTime = 2000;
+	long _waitingTime = 15000;
 	long _initialTime = System.currentTimeMillis();
 	long _refreshTime = 50;
 	
@@ -137,6 +137,36 @@ public class ReloadActivity extends Activity
 			        Log.v("Gallery", "Response: " + responseString);
 			        
 			        _dbHelper.updateSpikes(responseString);
+			    }
+			    else
+			    {
+			        //Closes the connection.
+			        response.getEntity().getContent().close();
+			        throw new IOException(statusLine.getReasonPhrase());
+			    }
+			}
+		    catch(Exception e)
+		    {
+		    	Log.v("Gallery Ex", e.getMessage());
+		    	// We should throw an error status to notify the activity
+		    }
+			
+			// Update BestPic here
+			try
+			{
+			    String url = "http://caricactus.com/feeds/v1/appli/getBest.php";
+				
+		        HttpResponse response = client.execute(new HttpGet(url));
+		        
+			    StatusLine statusLine = response.getStatusLine();
+			    if(statusLine.getStatusCode() == HttpStatus.SC_OK)
+			    {
+			        ByteArrayOutputStream output = new ByteArrayOutputStream();
+			        response.getEntity().writeTo(output);
+			        output.close();
+			        String responseString = output.toString();
+			        
+			        Gallery.Singleton().setBestPic(Integer.parseInt(responseString.split(",")[0]));
 			    }
 			    else
 			    {

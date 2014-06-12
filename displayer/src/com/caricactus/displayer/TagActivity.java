@@ -28,9 +28,8 @@ public class TagActivity extends Activity
 		// Barbel layout
 		ImageView barbel = (ImageView)findViewById(R.id.barbel);
 		barbel.setImageResource(R.drawable.tag_title_barbel);
-		LayoutParams barbelLayout = new LayoutParams(screenWidth, screenWidth / 5);
-		barbelLayout.addRule(RelativeLayout.BELOW, R.id.included);
-		barbel.setLayoutParams(barbelLayout);
+		barbel.getLayoutParams().height = screenWidth/5;
+
 		
 		// Tile canevas layout
 		LinearLayout canevas = (LinearLayout)findViewById(R.id.tile_canevas);

@@ -58,10 +58,8 @@ public class ViewerActivity extends Activity implements ISpikeDisplayer
 			Gallery.Singleton().selectAll();
 		}
 		
-		// Barbel layout
-		LayoutParams barbelLayout = new LayoutParams(screenWidth, screenWidth / 5);
-		barbelLayout.addRule(RelativeLayout.BELOW, R.id.included);
-		barbel.setLayoutParams(barbelLayout);
+		// Barbel size
+		barbel.getLayoutParams().height = screenWidth/5;
 		
 		// Set up the Scroller
 		initScroller();

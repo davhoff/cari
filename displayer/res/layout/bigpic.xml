@@ -1,84 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_below="@+id/cactus"
     android:background="@drawable/big_pic" >
-    
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="52" />
     
     <ImageButton android:id="@+id/newImage"
         android:background="?android:selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="249"
         android:scaleType="fitCenter"
         android:onClick="imageButton" />
-
-    <View
+		
+    <ImageButton android:id="@+id/newSpikeButton"
+        android:background="?android:selectableItemBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="33" />
-    
-    <LinearLayout 
-		android:layout_width="match_parent"
-        android:layout_height="0dp"
-		android:orientation="horizontal"
-        android:layout_weight="66" >
-        
-        <View
-	        android:layout_width="0dp"
-	        android:layout_height="0dp"
-	        android:layout_weight="6" />
-        
-        <ImageButton android:id="@+id/newSpikeButton"
-            android:background="?android:selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="15"
-            android:scaleType="fitXY"
-            android:onClick="spikeButton" />
-        
-        <View
-	        android:layout_width="0dp"
-	        android:layout_height="0dp"
-	        android:layout_weight="1" />
-        
-        <TextView android:id="@+id/newSpikeCount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:textSize="24sp" />
-        
-        <View
-	        android:layout_width="0dp"
-	        android:layout_height="0dp"
-	        android:layout_weight="3" />
-        
-        <TextView android:id="@+id/newAuthor"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="22"
-            android:textColor="#000000"
-            android:gravity="right|center_vertical"
-            android:textSize="24sp" />
-        
-        <View
-	        android:layout_width="0dp"
-	        android:layout_height="0dp"
-	        android:layout_weight="7" />
-        
-    </LinearLayout>
-
-    <View
+        android:scaleType="fitXY"
+        android:onClick="spikeButton" />
+    	
+    <TextView android:id="@+id/newSpikeCount"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="8" />
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:textSize="24sp" />
+    	
+    <TextView android:id="@+id/newAuthor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="#000000"
+        android:gravity="right|center_vertical"
+        android:textSize="24sp" />
     
-    
-</LinearLayout>
+</RelativeLayout>

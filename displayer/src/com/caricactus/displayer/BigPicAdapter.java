@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class BigPicAdapter extends ArrayAdapter<Caricature>
@@ -21,6 +22,26 @@ public class BigPicAdapter extends ArrayAdapter<Caricature>
 	private int _bigPicHeight;
 	private int _middleCactusHeight;
 	private int _topCactusHeight;
+	
+	private int _imageY;
+	private int _imageH;
+	private int _spikeX;
+	private int _spikeY;
+	private int _spikeW;
+	private int _spikeH;
+	private int _countX;
+	private int _countW;
+	private int _authorX;
+	private int _authorW;
+	
+	static class ViewHolder
+	{
+		int position;
+		ImageButton image;
+		TextView author;
+		ImageButton spikeButton;
+		TextView spikeCount;
+	}
 	
 	public BigPicAdapter(Context context, Caricature[] values)
 	{
@@ -37,11 +58,23 @@ public class BigPicAdapter extends ArrayAdapter<Caricature>
 		_bigPicHeight = _screenWidth * 10 / 16;
 		_middleCactusHeight = _screenWidth * 10 / 85;
 		_topCactusHeight = _screenWidth * 10 / 19;
+		
+		_imageY = _bigPicHeight * 52 / 400;
+		_imageH = _bigPicHeight * 249 / 400;
+		_spikeX = _screenWidth * 6 / 64;
+		_spikeY = _bigPicHeight * 328 / 400;
+		_spikeW = _screenWidth * 15 / 64;
+		_spikeH = _bigPicHeight * 66 / 400;
+		_countX = _screenWidth * 22 / 64;
+		_countW = _screenWidth * 10 / 64;
+		_authorX = _screenWidth * 35 / 64;
+		_authorW = _screenWidth * 22 / 64;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
+		Boolean isRecycling = false;
 		View bigPic = convertView;
 		if(position == 0)
 		{
@@ -49,50 +82,87 @@ public class BigPicAdapter extends ArrayAdapter<Caricature>
 			AbsListView.LayoutParams layout = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, _bigPicHeight + _topCactusHeight);
 			bigPic.setLayoutParams(layout);
 			
-			bigPic.findViewById(R.id.top_cactus).getLayoutParams().height = _topCactusHeight;
+			bigPic.findViewById(R.id.cactus).getLayoutParams().height = _topCactusHeight;
 		}
-		else if(bigPic == null || bigPic.getTag().toString().equals("0"))
+		else if(bigPic == null || ((ViewHolder)bigPic.getTag()).position == 0)
 		{
 			bigPic = LayoutInflater.from(_context).inflate(R.layout.bigpic_middle, parent, false);
 			AbsListView.LayoutParams layout = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, _bigPicHeight + _middleCactusHeight);
 			bigPic.setLayoutParams(layout);
 			
-			bigPic.findViewById(R.id.middle_cactus).getLayoutParams().height = _middleCactusHeight;
+			bigPic.findViewById(R.id.cactus).getLayoutParams().height = _middleCactusHeight;
 		}
-		bigPic.setTag(position);
-
+		else
+		{
+			isRecycling = true;
+		}
+		
+		// ViewHolder pattern
+		ViewHolder holder;
+		if(isRecycling)
+		{
+			holder = (ViewHolder)bigPic.getTag();
+		}
+		else
+		{
+			holder = new ViewHolder();
+			holder.image = (ImageButton)bigPic.findViewById(R.id.newImage);
+			holder.author = (TextView)bigPic.findViewById(R.id.newAuthor);
+			holder.spikeButton = (ImageButton)bigPic.findViewById(R.id.newSpikeButton);
+			holder.spikeCount = (TextView)bigPic.findViewById(R.id.newSpikeCount);
+			bigPic.setTag(holder);
+		}
+		holder.position = position;
+		
 		// Caricature to display
 		Caricature c = _values[position];
 		
 		// Image
-		ImageButton image = (ImageButton)bigPic.findViewById(R.id.newImage);
-		image.setImageBitmap(null);
-		c.setImage(image);
-		image.setTag(c._id);
+		holder.image.setImageBitmap(null);
+		c.setImage(holder.image);
+		holder.image.setTag(c._id);
 		
 		// Author
-		TextView author = (TextView)bigPic.findViewById(R.id.newAuthor);
-		author.setText(c._author);
+		holder.author.setText(c._author);
 		
 		// Spike button
-		ImageButton spikeButton = (ImageButton)bigPic.findViewById(R.id.newSpikeButton);
-		spikeButton.setTag(c._id);
+		holder.spikeButton.setTag(c._id);
 		if(c._didSpike)
 		{
-			spikeButton.setImageResource(R.drawable.spike_big_pic_disabled);
-			spikeButton.setEnabled(false);
+			holder.spikeButton.setImageResource(R.drawable.spike_big_pic_disabled);
+			holder.spikeButton.setEnabled(false);
 		}
 		else
 		{
-			spikeButton.setImageResource(R.drawable.spike_big_pic);
-			spikeButton.setEnabled(true);
+			holder.spikeButton.setImageResource(R.drawable.spike_big_pic);
+			holder.spikeButton.setEnabled(true);
 		}
 		
 		// Spike count
-		TextView spikeCount = (TextView)bigPic.findViewById(R.id.newSpikeCount);
-		spikeCount.setText(String.valueOf(c._spikes));
+		holder.spikeCount.setText(String.valueOf(c._spikes));
 		
-		// Add the middle cactus
+		// Layout
+		if(!isRecycling)
+		{
+			RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, _imageH);
+			imageParams.topMargin = _imageY;
+			holder.image.setLayoutParams(imageParams);
+			
+			RelativeLayout.LayoutParams spikeParams = new RelativeLayout.LayoutParams(_spikeW, _spikeH);
+			spikeParams.leftMargin = _spikeX;
+			spikeParams.topMargin = _spikeY;
+			holder.spikeButton.setLayoutParams(spikeParams);
+			
+			RelativeLayout.LayoutParams countParams = new RelativeLayout.LayoutParams(_countW, _spikeH);
+			countParams.leftMargin = _countX;
+			countParams.topMargin = _spikeY;
+			holder.spikeCount.setLayoutParams(countParams);
+
+			RelativeLayout.LayoutParams authorParams = new RelativeLayout.LayoutParams(_authorW, _spikeH);
+			authorParams.leftMargin = _authorX;
+			authorParams.topMargin = _spikeY;
+			holder.author.setLayoutParams(authorParams);
+		}
 		
 	    return bigPic;
 	}	
